@@ -4,21 +4,17 @@ import os
 
 class YoloModel:
     _instance = None
+    _model = None
 
     @classmethod
     def load(cls):
         if cls._instance is None:
-            # Ensure directory exists or handle path correctness
-            # For now assuming settings.MODEL_PATH is correct relative to CWD or absolute
+            cls._instance = cls()
             print(f"Loading YOLO model from {settings.MODEL_PATH}...")
-            # If model file strictly needed, we might want to check existence, 
-            # but ultralytics might download if not found (for standard models), 
-            # or fail for custom path. 
-            # The prompt suggested "models/best.pt".
-            cls._instance = YOLO(settings.MODEL_PATH) 
+            cls._instance._model = YOLO(settings.MODEL_PATH)
         return cls._instance
 
     def detect(self, image):
         # image can be bytes, PIL Image, numpy array, etc.
         # Ultralytics handles various formats.
-        return self._instance(image)
+        return self._model(image)
