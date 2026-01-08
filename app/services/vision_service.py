@@ -2,7 +2,6 @@ from app.models.yolo_model import YoloModel
 from app.api.dto.detect_response import DetectResponse, DetectionDto
 import io
 from PIL import Image
-import numpy as np
 
 class VisionService:
 
@@ -15,9 +14,7 @@ class VisionService:
         image_bytes = await image_file.read()
         
         image = Image.open(io.BytesIO(image_bytes))
-
         results = self.model.detect(image)
-        
         return self._to_detect_response(results)
 
     def _to_detect_response(self, results) -> DetectResponse:

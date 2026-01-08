@@ -1,6 +1,7 @@
 fastapi
 uvicorn
 pydantic
+pydantic-settings
 ultralytics
 opencv-python
 numpy
@@ -8,4 +9,5 @@ pillow
 torch
 python-multipart
 dependency-injector
-pydantic-settings
+transformers
+safetensors
